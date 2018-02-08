@@ -1,36 +1,50 @@
+#  -------------------------------------------------------------
 # .bash_profile
+#
+# This file contains all of bash configuration and aliases.
+#
+#  -------------------------------------------------------------
 
-# User specific environment and startup programs
+#   Startup and user specific
+#   ------------------------------------------------------------
+#
 alias reload="source ~/.bash_profile"
 
-# Use vim as vi
+#   Set vim as vi
+#   ------------------------------------------------------------
+#
 alias vi="vim"
 alias sudo="sudo "
 
-#
-# Set editor
+#   Set Default Editor
+#   ------------------------------------------------------------
 #
 export EDITOR=vim
 
-#
-# Use ls with colors
+#   Include colors when listing
+#   ------------------------------------------------------------
 #
 alias ls="ls -G"
 
-#
-# Set up colors for ls
+#   Setup colors for listing
+#   ------------------------------------------------------------
 #
 export CLICOLOR=1
 export LSCOLORS=HxgxcxdxCxegedabagacad
 
-#
-# Open all files with uncommited
-# changes in vim (with tabs)
+#   Open all (with uncommited changes) files in vim
+#   ------------------------------------------------------------
 #
 alias vi-git-status='vi -p `git status --porcelain | cut -c4-`'
 
+#   Terminal aliases
 #
-# Git aliases
+#   ------------------------------------------------------------
+alias ll='ls -FGlAhp' # Preferred 'll'
+
+
+#   Git aliases
+#   ------------------------------------------------------------
 #
 alias gp='git push'
 alias gb='git branch'
@@ -38,19 +52,31 @@ alias gc='git checkout'
 alias gm='git commit -m'
 alias gma='git commit -am'
 alias gd='git diff'
-alias gs='git status'
 alias gra='git remote add'
 alias grr='git remote rm'
 alias gpu='git pull'
 alias gl='git log'
 alias ga='git add'
-alias gcl='git clone'
 alias gs='git status'
-alias gmerged='git branch --merged | grep -v '\*' | grep -v master | grep -v develop'
-alias gclean='git branch --merged | grep -v '\*' | grep -v master | grep -v develop | xargs -t -n 1 git branch -d'
 
+#   Searching
+#   ------------------------------------------------------------
 #
-# Prompt colors
+alias quickfind='find . -name '
+ff () { find . -name "*$1*" -ls ; }
+
+#   Networking
+#   ------------------------------------------------------------
+#
+alias myip='curl -s -w "\n" http://whatismyip.akamai.com/'
+alias ipen0='ipconfig getpacket en0'
+
+#   OS
+#   ------------------------------------------------------------
+alias dsstoredelete='find . -type f -name "*.DS_Store" -ls -delete'
+
+#   Prompt colors
+#   ------------------------------------------------------------
 #
 GRAY="\[\e[0;00m\]"
 BLACK="\[\e[0;30m\]"
@@ -67,15 +93,15 @@ LIGHT_BLUE="\[\e[0;94m\]"
 LIGHT_CYAN="\[\e[0;96m\]"
 LIGHT_MAGENTA="\[\e[0;95m\]"
 
-#
-# Git branch in prompt.
+#   Git branch in prompt
+#   ------------------------------------------------------------
 #
 parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
 #
-# Git status information
+# Git status
 #
 _git_prompt() {
     local git_status="`git status -unormal 2>&1`"
@@ -100,12 +126,17 @@ _git_prompt() {
     fi
 }
 
+#
+# Set prompt
+#
 _prompt_command() {
     PS1="`_git_prompt`${WHITE}\t ${LIGHT_CYAN}\u${GRAY}@${LIGHT_BLUE}\h ${YELLOW}\w${LIGHT_MAGENTA}\$(parse_git_branch)${GRAY} $ "
 }
 PROMPT_COMMAND=_prompt_command
 
-PATH=$PATH:$HOME/.local/bin:$HOME/bin:/usr/local/bin
-PATH=/opt/local/bin:$PATH
+#
+# Some paths
+#
+PATH=$PATH:$HOME/.local/bin:$HOME/bin:/usr/local/bin:/opt/local/bin
 
 export PATH
