@@ -198,7 +198,7 @@ set encoding=utf-8
 
   " Clear highlighting on escape in normal mode
   nnoremap <silent> <esc> :noh<return><esc>
-  nnoremap <esc>^[ <esc>^[
+  nnoremap <esc> <esc>
 
   " Matching parentheses/blocks
   highlight MatchParent cterm=bold ctermfg=16 ctermbg=15
@@ -248,8 +248,8 @@ set encoding=utf-8
   nnoremap <S-Down> :m+<CR>
 
   " Switch tabs with <Alt-Left>/<Alt-Right>
-  set <F13>=f
-  set <F14>=b
+  set <F13>=f
+  set <F14>=b
   nnoremap <F13> :tabnext<CR>
   nnoremap <F14> :tabprev<CR>
 
