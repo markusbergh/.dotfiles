@@ -1,0 +1,18 @@
+[user]
+  name = "Markus Bergh"
+  email = hi@markusbergh.se
+
+[alias]
+  # one-line log
+  ls = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+  
+  co = checkout
+  a = add
+  ap = add -p
+  c = commit
+  cm = commit -m
+  ac = !git add . && git commit -am
+  p = push
+
+  pr = remote prune origin
+  st = status
