@@ -172,7 +172,7 @@ set encoding=utf-8
 
   " Invisible characters
   set list
-  set listchars=eol:Â¬,tab:Â·Â·,trail:Â·,extends:>,precedes:<,space:Â·
+  set listchars=eol:¬,tab:··,trail:·,extends:>,precedes:<,space:·
   highlight SpecialKey ctermfg=238
   highlight NonText ctermfg=238
 
