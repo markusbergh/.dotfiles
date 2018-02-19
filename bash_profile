@@ -1,46 +1,50 @@
-#  -------------------------------------------------------------
-# .bash_profile
+#   -------------------------------------------------------------
+#   .bash_profile
 #
-# This file contains all of bash configuration and aliases.
-#
-#  -------------------------------------------------------------
+#   This file contains all of bash configuration and aliases.
+#   -------------------------------------------------------------
 
+#
 #   Startup and user specific
 #   ------------------------------------------------------------
-#
 alias reload="source ~/.bash_profile"
 
+#
 #   Set vim as vi
 #   ------------------------------------------------------------
-#
 alias vi="vim"
 alias sudo="sudo "
 
+#
 #   Set Default Editor
 #   ------------------------------------------------------------
-#
 export EDITOR=vim
 
+#
 #   Include colors when listing
 #   ------------------------------------------------------------
-#
 alias ls="ls -G"
 
+#
 #   Setup colors for listing
 #   ------------------------------------------------------------
-#
 export CLICOLOR=1
 export LSCOLORS=HxgxcxdxCxegedabagacad
 
+#
 #   Open all (with uncommited changes) files in vim
 #   ------------------------------------------------------------
-#
 alias vi-git-status='vi -p `git status --porcelain | cut -c4-`'
 
-#   Terminal aliases
 #
+#   Terminal aliases
 #   ------------------------------------------------------------
 alias ll='ls -FGlAhp' # Preferred 'll'
+
+#
+#   Avoid succesive duplicates in the bash command history.
+#   ------------------------------------------------------------
+export HISTCONTROL=ignoredups
 
 
 #   Git aliases
@@ -97,33 +101,35 @@ LIGHT_MAGENTA="\[\e[0;95m\]"
 #   ------------------------------------------------------------
 #
 parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
 #
 # Git status
 #
 _git_prompt() {
-    local git_status="`git status -unormal 2>&1`"
+  local git_status="`git status -unormal 2>&1`"
 
-    if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
-        if [[ "$git_status" =~ nothing\ to\ commit ]]; then
-            local ansi=42
-        elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]; then
-            local ansi=43
-        else
-            local ansi=43
-        fi
-        if [[ "$git_status" =~ On\ branch\ ([^[:space:]]+) ]]; then
-            branch=${BASH_REMATCH[1]}
-            test "$branch" != master || branch=' '
-        else
-            # Detached HEAD.  (branch=HEAD is a faster alternative.)
-            branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null ||
-                echo HEAD`)"
-        fi
-        echo -n '\[\e[0;37;'"$ansi"';1m\] \[\e[0m\] '
+  if ! [[ "$git_status" =~ Not\ a\ git\ repo ]]; then
+    if [[ "$git_status" =~ nothing\ to\ commit ]]; then
+        local ansi=42
+    elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]; then
+        local ansi=43
+    else
+        local ansi=43
     fi
+
+    if [[ "$git_status" =~ On\ branch\ ([^[:space:]]+) ]]; then
+        branch=${BASH_REMATCH[1]}
+        test "$branch" != master || branch=' '
+    else
+        # Detached HEAD.  (branch=HEAD is a faster alternative.)
+        branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null ||
+            echo HEAD`)"
+    fi
+
+    echo -n '\[\e[0;37;'"$ansi"';1m\] \[\e[0m\] '
+  fi
 }
 
 #
