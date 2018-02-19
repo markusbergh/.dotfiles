@@ -42,6 +42,11 @@ alias vi-git-status='vi -p `git status --porcelain | cut -c4-`'
 alias ll='ls -FGlAhp' # Preferred 'll'
 
 #
+#   Remove .DS_Store recursivly
+#   ------------------------------------------------------------
+alias rm_dstore='find . -name '.DS_Store' -type f -delete'
+
+#
 #   Avoid succesive duplicates in the bash command history.
 #   ------------------------------------------------------------
 export HISTCONTROL=ignoredups
