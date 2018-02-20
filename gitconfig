@@ -1,3 +1,11 @@
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = true
+  pager = true
+
 [user]
   name = "Markus Bergh"
   email = hi@markusbergh.se
@@ -16,3 +24,6 @@
 
   pr = remote prune origin
   st = status
+
+[push]
+  default = simple
