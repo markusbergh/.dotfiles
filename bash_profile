@@ -5,9 +5,23 @@
 #   -------------------------------------------------------------
 
 #
+#   Git auto-completion
+#   -------------------------------------------------------------
+source ~/.dotfiles/git-completion.bash
+
+#
 #   Startup and user specific
 #   ------------------------------------------------------------
 alias reload="source ~/.bash_profile"
+
+#   Paths
+#   ------------------------------------------------------------
+export PATH="$PATH:/usr/local/bin/"
+export PATH="/usr/local/opt/bin:/usr/local/bin:/usr/local/:/usr/local/sbin:$PATH"
+
+#   Set default blocksize for ls, df, du
+#   ------------------------------------------------------------
+export BLOCKSIZE=1k
 
 #
 #   Set vim as vi
@@ -55,6 +69,7 @@ export HISTCONTROL=ignoredups
 #   Git aliases
 #   ------------------------------------------------------------
 #
+alias g='git'
 alias gp='git push'
 alias gb='git branch'
 alias gc='git checkout'
@@ -144,10 +159,3 @@ _prompt_command() {
     PS1="`_git_prompt`${WHITE}\t ${LIGHT_CYAN}\u${GRAY}@${LIGHT_BLUE}\h ${YELLOW}\w${LIGHT_MAGENTA}\$(parse_git_branch)${GRAY} $ "
 }
 PROMPT_COMMAND=_prompt_command
-
-#
-# Some paths
-#
-PATH=$PATH:$HOME/.local/bin:$HOME/bin:/usr/local/bin:/opt/local/bin
-
-export PATH
