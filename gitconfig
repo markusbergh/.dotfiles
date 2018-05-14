@@ -21,6 +21,10 @@
   cm = commit -m
   ac = !git add . && git commit -am
   p = push
+  l = branch -l
+  local = branch -l
+  r = branch -r
+  remote = branch -r
 
   pr = remote prune origin
   st = status
