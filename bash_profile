@@ -7,7 +7,14 @@
 #
 #   Git auto-completion
 #   -------------------------------------------------------------
-source ~/.dotfiles/git-completion.bash
+if [ -f ~/.dotfiles/git-completion.bash ]; then
+  source ~/.dotfiles/git-completion.bash
+
+  # Add git completion to aliases
+  __git_complete g __git_main
+fi
+
+
 
 #
 #   Startup and user specific
