@@ -13,6 +13,8 @@
 [alias]
   # one-line log
   ls = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate --date=short
+
+  latest-tag = "!f() { git describe --tags $(git rev-list --tags --max-count=1); }; f"
   
   co = checkout
   a = add

@@ -181,8 +181,8 @@ set encoding=utf-8
   highlight LineNr ctermfg=8
 
   " Highlight line
-  :set cursorline
-  highlight CursorLineNr ctermfg=7
+  set cursorline
+  highlight CursorLineNr cterm=NONE ctermfg=7
   highlight CursorLine ctermbg=234 cterm=NONE
 
   " Search
@@ -391,6 +391,7 @@ set encoding=utf-8
 " Dev icons {
 
   let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+  let g:NERDTreeFileExtensionHighlightFullName = 1
   let g:DevIconsEnableFoldersOpenClose = 1
   let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
 

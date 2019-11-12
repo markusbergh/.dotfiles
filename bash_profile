@@ -23,8 +23,7 @@ alias reload="source ~/.bash_profile"
 
 #   Paths
 #   ------------------------------------------------------------
-export PATH="$PATH:/usr/local/bin/"
-export PATH="/usr/local/opt/bin:/usr/local/bin:/usr/local/:/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/bin:/usr/local/bin:/usr/local/:/usr/local/sbin:/opt/local/bin:$PATH"
 
 #   Set default blocksize for ls, df, du
 #   ------------------------------------------------------------
