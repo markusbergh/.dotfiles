@@ -315,14 +315,13 @@ set encoding=utf-8
       \ "Modified"  : "~",
       \ "Staged"    : "+",
       \ "Untracked" : "+",
-      \ "Renamed"   : "âžœ",
-      \ "Unmerged"  : "â•",
-      \ "Deleted"   : "âœ–",
-      \ "Dirty"     : "â¦¿",
-      \ "Clean"     : "âœ”ï¸Ž",
+      \ "Renamed"   : "➜",
+      \ "Unmerged"  : "═",
+      \ "Deleted"   : "✖",
+      \ "Dirty"     : "⦿",
+      \ "Clean"     : "✔︎",
       \ "Unknown"   : "?"
       \ }
-
 " }
 
 " Airline {

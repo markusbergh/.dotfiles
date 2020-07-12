@@ -5,45 +5,51 @@
 #   -------------------------------------------------------------
 
 #
+#   Bash auto-completion
+#   -------------------------------------------------------------
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
+#
 #   Git auto-completion
 #   -------------------------------------------------------------
-if [ -f ~/.dotfiles/git-completion.bash ]; then
-  source ~/.dotfiles/git-completion.bash
+if [ -f ~/.dotfiles/bash_git_completion.bash ]; then
+  source ~/.dotfiles/bash_git_completion.bash
 
   # Add git completion to aliases
   __git_complete g __git_main
 fi
 
-
+#
+#   Bash Aliases
+#   ------------------------------------------------------------
+if [ -f ~/.dotfiles/bash_aliases.bash ]; then
+  source ~/.dotfiles/bash_aliases.bash
+fi
 
 #
-#   Startup and user specific
+#   Npm Auto Completion
 #   ------------------------------------------------------------
-alias reload="source ~/.bash_profile"
+if [ -f ~/.dotfiles/bash_npm_autocompletion.bash ]; then
+  source ~/.dotfiles/bash_npm_autocompletion.bash
+fi
 
 #   Paths
 #   ------------------------------------------------------------
-export PATH="/usr/local/opt/bin:/usr/local/bin:/usr/local/:/usr/local/sbin:/opt/local/bin:$PATH"
+export PATH="$PATH:/opt/local/bin:/usr/local/sbin"
 
 #   Set default blocksize for ls, df, du
 #   ------------------------------------------------------------
 export BLOCKSIZE=1k
 
 #
-#   Set vim as vi
+#   Avoid succesive duplicates in the bash command history.
 #   ------------------------------------------------------------
-alias vi="vim"
-alias sudo="sudo "
+export HISTCONTROL=ignoredups
 
 #
 #   Set Default Editor
 #   ------------------------------------------------------------
 export EDITOR=vim
-
-#
-#   Include colors when listing
-#   ------------------------------------------------------------
-alias ls="ls -G"
 
 #
 #   Setup colors for listing
@@ -52,58 +58,9 @@ export CLICOLOR=1
 export LSCOLORS=HxgxcxdxCxegedabagacad
 
 #
-#   Open all (with uncommited changes) files in vim
-#   ------------------------------------------------------------
-alias vi-git-status='vi -p `git status --porcelain | cut -c4-`'
-
-#
-#   Terminal aliases
-#   ------------------------------------------------------------
-alias ll='ls -FGlAhp' # Preferred 'll'
-
-#
-#   Remove .DS_Store recursivly
-#   ------------------------------------------------------------
-alias rm_dstore='find . -name '.DS_Store' -type f -delete'
-
-#
 #   Avoid succesive duplicates in the bash command history.
 #   ------------------------------------------------------------
 export HISTCONTROL=ignoredups
-
-
-#   Git aliases
-#   ------------------------------------------------------------
-#
-alias g='git'
-alias gp='git push'
-alias gb='git branch'
-alias gc='git checkout'
-alias gm='git commit -m'
-alias gma='git commit -am'
-alias gd='git diff'
-alias gra='git remote add'
-alias grr='git remote rm'
-alias gpu='git pull'
-alias gl='git log'
-alias ga='git add'
-alias gs='git status'
-
-#   Searching
-#   ------------------------------------------------------------
-#
-alias quickfind='find . -name '
-ff () { find . -name "*$1*" -ls ; }
-
-#   Networking
-#   ------------------------------------------------------------
-#
-alias myip='curl -s -w "\n" http://whatismyip.akamai.com/'
-alias ipen0='ipconfig getpacket en0'
-
-#   OS
-#   ------------------------------------------------------------
-alias dsstoredelete='find . -type f -name "*.DS_Store" -ls -delete'
 
 #   Prompt colors
 #   ------------------------------------------------------------
