@@ -122,3 +122,8 @@ _prompt_command() {
     PS1="`_git_prompt`${WHITE}\t ${LIGHT_CYAN}\u${GRAY}@${LIGHT_BLUE}\h ${YELLOW}\w${LIGHT_MAGENTA}\$(parse_git_branch)${GRAY} $ "
 }
 PROMPT_COMMAND=_prompt_command
+
+#
+# Mac OS Catalina
+#
+export BASH_SILENCE_DEPRECATION_WARNING=1
