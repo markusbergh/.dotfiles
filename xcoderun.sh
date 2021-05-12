@@ -123,17 +123,57 @@ then
   fi
 fi
 
-echo -e "${cBlue}
-~~~~~ Running ~~~~~
+main_command="xcodebuild $project_type $project_command -scheme $scheme_name -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.5'"
 
-${cGreen}xcodebuild
-  $project_type $project_command
-  -scheme $scheme_name
-  -sdk iphonesimulator
-  -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.5'
-  $run_as${cNone}
+if [ $run_as="test" ] && [ $run_single="true" ]
+then
+  echo -e "${cBlue}
+  ~~~~~ Running ~~~~~
 
-${cYellow}Using: xcpretty (for output)${cNone}
-"
+  ${cGreen}xcodebuild
+    $project_type $project_command
+    -scheme $scheme_name
+    -sdk iphonesimulator
+    -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.5'
+    -only-testing $single_test_name
+    test
 
-xcodebuild $project_type $project_command -scheme $scheme_name -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.5' $run_as if [ run_single="true" ] then -only-testing $single_test_name fi | xcpretty
+  ${cYellow}Using: xcpretty (for output)${cNone}
+  "
+
+  bash -c "$main_command -only-testing $single_test_name test | xcpretty"
+
+elif [ $run_as="test" ]
+then
+  echo -e "${cBlue}
+  ~~~~~ Running ~~~~~
+
+  ${cGreen}xcodebuild
+    $project_type $project_command
+    -scheme $scheme_name
+    -sdk iphonesimulator
+    -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.5'
+    test
+
+  ${cYellow}Using: xcpretty (for output)${cNone}
+  "
+
+  bash -c "$main_command test | xcpretty"
+
+else
+  echo -e "${cBlue}
+  ~~~~~ Running ~~~~~
+
+  ${cGreen}xcodebuild
+    $project_type $project_command
+    -scheme $scheme_name
+    -sdk iphonesimulator
+    -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.5'
+    build
+
+  ${cYellow}Using: xcpretty (for output)${cNone}
+  "
+
+  bash -c "$main_command build | xcpretty"
+
+fi
