@@ -82,3 +82,8 @@ ff () { find . -name "*$1*" -ls ; }
 alias myip='curl -s -w "\n" http://whatismyip.akamai.com/'
 alias mylocalip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 alias ipen0='ipconfig getpacket en0'
+
+#   xcodebuild helper
+#   ------------------------------------------------------------
+#
+alias xcoderun="~/.dotfiles/xcoderun.sh"
