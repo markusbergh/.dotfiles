@@ -95,7 +95,7 @@ done
 
 ## If running tests, should we run all or a single one?
 
-if [ $run_as == "test" ]
+if [[ $run_as == "test" ]]
 then
   echo -e "${cYellow}Do you want to run all tests or a single one?${cNone} "
   run_all_or_single_options=("Run all tests" "Run single test")
@@ -113,7 +113,7 @@ then
     esac
   done
 
-  if [ $run_single == "true" ]
+  if [[ $run_single == "true" ]]
   then
     echo -e "${cYellow}What is the name of the single test you want to run?${cNone} "
     unset single_test_name
@@ -125,7 +125,7 @@ fi
 
 main_command="xcodebuild $project_type $project_command -scheme $scheme_name -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.5'"
 
-if [ $run_as="test" ] && [ $run_single="true" ]
+if [[ $run_as == "test" ]] && [[ $run_single == "true" ]]
 then
   echo -e "${cBlue}
   ~~~~~ Running ~~~~~
