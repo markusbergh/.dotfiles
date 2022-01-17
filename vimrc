@@ -305,13 +305,13 @@ set encoding=utf-8
   let g:NERDTreeWinSize = 40
 
   " Fixes the plugin mess of nerdtree-git-plugin and syntastic
-  let NERDTreeUpdateOnWrite  = 0
+  let NERDTreeGitStatusUpdateOnWrite  = 0
 
   " Quit NERDTree when last buffer
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
   " Git symbols
-  let g:NERDTreeIndicatorMapCustom = {
+  let g:NERDTreeGitStatusIndicatorMapCustom = {
       \ "Modified"  : "~",
       \ "Staged"    : "+",
       \ "Untracked" : "+",

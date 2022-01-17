@@ -15,6 +15,7 @@
   ls = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate --date=short
   latest-tag = "!f() { git describe --tags $(git rev-list --tags --max-count=1); }; f"
   latest-commit = "diff-tree --no-commit-id --name-status -r HEAD"
+  commited-changes = "!f() { git diff $(git rev-parse --abbrev-ref HEAD); }; f"
   
   co = checkout
   a = add
