@@ -119,7 +119,7 @@ _git_prompt() {
 # Set prompt
 #
 _prompt_command() {
-    PS1="`_git_prompt`${WHITE}\t ${LIGHT_CYAN}\u${GRAY}@${LIGHT_BLUE}\h ${YELLOW}\w${LIGHT_MAGENTA}\$(parse_git_branch)${GRAY} $ "
+    PS1="╭─`_git_prompt`${WHITE}\t ${LIGHT_CYAN}\u${GRAY}@${LIGHT_BLUE}\h ${YELLOW}\w${LIGHT_MAGENTA}\$(parse_git_branch)${GRAY}\n╰─$ "
 }
 PROMPT_COMMAND=_prompt_command
 
