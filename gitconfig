@@ -6,6 +6,18 @@
   ui = true
   pager = true
 
+[color "grep"]
+  match = "#fff000"
+  linenumber = yellow bold
+  column = red
+  separator = yellow
+
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+
 [user]
   name = "Markus Bergh"
   email = hi@markusbergh.se
