@@ -155,7 +155,7 @@ set updatetime=100
   nnoremap * :keepjumps normal! mi*`i<CR>
 
   " Clear highlighting on escape in normal mode
-  nnoremap <silent> <esc> :noh<return><esc>
+  nnoremap <silent> <esc> :noh<return>
   nnoremap <esc> <esc>
 
   " Matching parentheses/blocks
@@ -383,5 +383,12 @@ set updatetime=100
 
   let g:gitgutter_realtime = 0
   let g:gitgutter_eager = 0
+  let g:gitgutter_set_sign_backgrounds = 1
+
+  highlight SignColumn ctermbg=236
+
+  highlight GitGutterAdd ctermfg=2
+  highlight GitGutterChange ctermfg=3
+  highlight GitGutterDelete ctermfg=1
 
 " }
