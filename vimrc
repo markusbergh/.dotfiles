@@ -1,6 +1,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set encoding=utf-8
+set updatetime=100
 
 " vundle {
 
@@ -13,7 +14,6 @@ set encoding=utf-8
   " let Vundle manage Vundle, required
   Plugin 'VundleVim/Vundle.vim'
   Plugin 'ctrlpvim/ctrlp.vim'
-  Plugin 'scrooloose/nerdtree'
   Plugin 'scrooloose/syntastic'
   Plugin 'Xuyuanp/nerdtree-git-plugin'
   Plugin 'vim-airline/vim-airline'
@@ -23,6 +23,8 @@ set encoding=utf-8
   Plugin 'pangloss/vim-javascript'
   Plugin 'mxw/vim-jsx'
   Plugin 'ryanoasis/vim-devicons'
+  Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
+  Plugin 'preservim/nerdtree'
   Plugin 'tpope/vim-fugitive'
   Plugin 'mtscout6/syntastic-local-eslint.vim'
   Plugin 'JulesWang/css.vim'
@@ -52,10 +54,12 @@ set encoding=utf-8
   " Set background
   set background=dark
 
-  " JavaScript syntax highlighting
   highlight String ctermfg=42
   highlight Comment ctermfg=245
-  highlight Directory ctermfg=81
+  highlight MatchParen ctermbg=15 ctermfg=0
+  highlight Todo ctermfg=red ctermbg=NONE
+
+  " JavaScript syntax highlighting
   highlight jsModuleKeywords ctermfg=135
   highlight jsTemplateBraces ctermfg=161
   highlight jsTemplateExpression ctermfg=15
@@ -83,8 +87,6 @@ set encoding=utf-8
   highlight xmlEndTag ctermfg=161
   highlight xmlTag ctermfg=161
   highlight xmlAttrib ctermfg=42
-  highlight MatchParen ctermbg=15 ctermfg=0
-  highlight Todo ctermfg=red ctermbg=NONE
 
   " CSS syntax highlighting
   highlight cssSelector ctermfg=220
@@ -113,60 +115,15 @@ set encoding=utf-8
   highlight cssMediaProp ctermfg=15 
 
   " NERDTree syntax highlighting
-  highlight NERDTreeDir ctermfg=15
-  highlight NERDTreeDirSlash ctermfg=15
-  highlight NERDTreeFile ctermfg=248
+  highlight NERDTreeDir ctermfg=255
+  highlight NERDTreeDirSlash ctermfg=255
+  highlight NERDTreeFile ctermfg=7
   highlight NERDTreeOpenable ctermfg=255
   highlight NERDTreeClosable ctermfg=255
   highlight NERDTreeLinkFile ctermfg=255
   highlight NERDTreeLinkDir ctermfg=255
-  highlight NERDTreeLinkTarget ctermfg=248
-  highlight NERDTreeExecFile ctermfg=255
-
-  " NERDTress File highlighting
-  
-  " Python
-  autocmd filetype nerdtree highlight py ctermbg=none ctermfg=214
-  autocmd filetype nerdtree syn match py #î˜†# containedin=NERDTreeFile
-
-  " JavaScript
-  autocmd filetype nerdtree highlight js ctermbg=none ctermfg=226
-  autocmd filetype nerdtree syn match js #î˜Œ# containedin=NERDTreeFile
-
-  " Markdown
-  autocmd filetype nerdtree highlight md ctermbg=none ctermfg=74
-  autocmd filetype nerdtree syn match md #î˜‰# containedin=NERDTreeFile
-
-  " HTML
-  autocmd filetype nerdtree highlight html ctermbg=none ctermfg=204
-  autocmd filetype nerdtree syn match html #î˜Ž# containedin=NERDTreeFile
-
-  " CSS
-  autocmd filetype nerdtree highlight css ctermbg=none ctermfg=104
-  autocmd filetype nerdtree syn match css #î˜”# containedin=NERDTreeFile
-
-  " package.json
-  autocmd filetype nerdtree highlight package ctermbg=none ctermfg=204
-  autocmd filetype nerdtree syn match package "\vî˜‹.*package.json$" containedin=NERDTreeFile
-
-  " ESLint configuration
-  autocmd filetype nerdtree highlight eslint ctermbg=none ctermfg=226
-  autocmd filetype nerdtree syn match eslint "\vî˜’.*.eslintrc$" containedin=NERDTreeFile
-
-  " Babel configuration
-  autocmd filetype nerdtree highlight babelrc ctermbg=none ctermfg=226
-  autocmd filetype nerdtree syn match babelrc "\vî˜’.*.babelrc$" containedin=NERDTreeFile
-
-  " Git modified
-  autocmd filetype nerdtree highlight gitmodified ctermbg=none ctermfg=226
-  autocmd filetype nerdtree syn match gitmodified #â¦¿# containedin=NERDTreeDir
-
-  autocmd filetype nerdtree highlight gitmodified ctermbg=none ctermfg=226
-  autocmd filetype nerdtree syn match gitmodified "\~" containedin=NERDTreeFile
-
-  autocmd filetype nerdtree highlight gitadd ctermbg=none ctermfg=119
-  autocmd filetype nerdtree syn match gitadd #+# containedin=NERDTreeFile
-" }
+  highlight NERDTreeLinkTarget ctermfg=255
+  highlight NERDTreeExecFile ctermfg=10
 
 " Editor {
 
@@ -183,7 +140,7 @@ set encoding=utf-8
   " Highlight line
   set cursorline
   highlight CursorLineNr cterm=NONE ctermfg=7
-  highlight CursorLine ctermbg=234 cterm=NONE
+  highlight CursorLine ctermbg=236 cterm=NONE
 
   " Search
   highlight Search ctermfg=22 ctermbg=10
@@ -214,7 +171,7 @@ set encoding=utf-8
 
   " Colorcolumn
   :set colorcolumn=80 
-  highlight colorcolumn ctermbg=234
+  highlight colorcolumn ctermbg=236
 
   " Always show current position
   set ruler
@@ -389,10 +346,21 @@ set encoding=utf-8
 
 " Dev icons {
 
-  let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-  let g:NERDTreeFileExtensionHighlightFullName = 1
-  let g:DevIconsEnableFoldersOpenClose = 1
   let g:WebDevIconsNerdTreeAfterGlyphPadding = ' '
+
+" }
+
+" NERDTree syntax highlighting {
+
+  let s:aqua = "8eecf5"
+  let s:green = "87ff00"
+
+  let g:NERDTreeExtensionHighlightColor = {}
+  let g:NERDTreeExtensionHighlightColor['sh'] = s:aqua
+  let g:NERDTreeExtensionHighlightColor['bash'] = s:aqua
+
+  let g:NERDTreePatternMatchHighlightColor = {}
+  let g:NERDTreePatternMatchHighlightColor['vimrc'] = s:green
 
 " }
 

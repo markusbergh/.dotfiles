@@ -55,7 +55,7 @@ export EDITOR=vim
 #   Setup colors for listing
 #   ------------------------------------------------------------
 export CLICOLOR=1
-export LSCOLORS=HxgxcxdxCxegedabagacad
+export LSCOLORS="HxFxcxdxCxegedabagacad"
 
 #
 #   Avoid succesive duplicates in the bash command history.
