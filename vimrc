@@ -280,6 +280,12 @@ set updatetime=100
       \ "Clean"     : "✔︎",
       \ "Unknown"   : "?"
       \ }
+
+  " Git diff colors
+  let g:NERDTreeGitStatusHighlightingCustom = {}
+  let g:NERDTreeGitStatusHighlightingCustom['Untracked'] = 'ctermfg=green'
+  let g:NERDTreeGitStatusHighlightingCustom['Modified'] = 'ctermfg=yellow'
+
 " }
 
 " Airline {
