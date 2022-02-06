@@ -24,6 +24,7 @@ set updatetime=100
   Plugin 'ryanoasis/vim-devicons'
   Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plugin 'mtscout6/syntastic-local-eslint.vim'
+  Plugin 'keith/swift.vim'
 
   " Vundle file extensions
   Plugin 'mxw/vim-jsx'
