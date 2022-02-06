@@ -47,12 +47,6 @@ alias ll='ls -FGlAhp' # Preferred 'll'
 #   ------------------------------------------------------------
 alias rm_dstore='find . -name '.DS_Store' -type f -delete'
 
-#
-#   Set vim as vi
-#   ------------------------------------------------------------
-alias vi="vim"
-alias sudo="sudo "
-
 #   Git aliases
 #   ------------------------------------------------------------
 #
