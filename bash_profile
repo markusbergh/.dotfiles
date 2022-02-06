@@ -133,10 +133,5 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 #
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
-# 
-# Autojump
-#
-[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
-
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
