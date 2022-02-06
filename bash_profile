@@ -127,3 +127,16 @@ PROMPT_COMMAND=_prompt_command
 # Mac OS Catalina
 #
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+#
+# iTerm shell integration
+#
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# 
+# Autojump
+#
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
