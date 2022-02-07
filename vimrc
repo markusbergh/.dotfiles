@@ -16,20 +16,23 @@ set updatetime=100
   Plugin 'ctrlpvim/ctrlp.vim'
   Plugin 'scrooloose/nerdtree'
   Plugin 'scrooloose/syntastic'
-  Plugin 'Xuyuanp/nerdtree-git-plugin'
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'airblade/vim-gitgutter'
   Plugin 'ervandew/supertab'
   Plugin 'ryanoasis/vim-devicons'
   Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plugin 'mtscout6/syntastic-local-eslint.vim'
-  Plugin 'keith/swift.vim'
+
+  " Vundle git plugins
+  Plugin 'Xuyuanp/nerdtree-git-plugin'
+  Plugin 'airblade/vim-gitgutter'
+  Plugin 'tpope/vim-fugitive'
 
   " Vundle file extensions
   Plugin 'mxw/vim-jsx'
   Plugin 'JulesWang/css.vim'
   Plugin 'pangloss/vim-javascript'
+  Plugin 'keith/swift.vim'
 
   " All of your Plugins must be added before the following line
   call vundle#end()            " required
