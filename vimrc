@@ -194,6 +194,9 @@ set updatetime=100
   set t_vb=
   set tm=500
 
+  " Do not let cursor scroll below or above N number of lines when scrolling.
+  set scrolloff=5
+
 " }
 
 " Keys {

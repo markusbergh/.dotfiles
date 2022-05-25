@@ -2,5 +2,5 @@ set show-all-if-ambiguous on
 set completion-ignore-case on
 set meta-flag on
 set input-meta on
-set convert-meta on
+set convert-meta off
 set output-meta on
