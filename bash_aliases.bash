@@ -64,6 +64,11 @@ alias gl='git log'
 alias ga='git add'
 alias gs='git status'
 
+#   SSH Key
+#   ------------------------------------------------------------
+alias ssh-add='ssh-add --apple-use-keychain'
+
+#
 #   Searching
 #   ------------------------------------------------------------
 #
