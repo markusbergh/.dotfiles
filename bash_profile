@@ -33,6 +33,14 @@ if [ -f ~/.dotfiles/bash_npm_autocompletion.bash ]; then
   source ~/.dotfiles/bash_npm_autocompletion.bash
 fi
 
+#
+#   asdf
+#   ------------------------------------------------------------
+if [ -f ~/.asdf/asdf.sh ]; then
+  . "$HOME/.asdf/asdf.sh"
+  . "$HOME/.asdf/completions/asdf.bash"
+fi
+
 #   Paths
 #   ------------------------------------------------------------
 export PATH="$PATH:/opt/local/bin:/usr/local/sbin"
@@ -61,6 +69,25 @@ export LSCOLORS="HxFxcxdxCxegedabagacad"
 #   Avoid succesive duplicates in the bash command history.
 #   ------------------------------------------------------------
 export HISTCONTROL=ignoredups
+
+#
+# Mac OS Catalina (bash warning)
+#
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+#
+# iTerm shell integration
+#
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+#
+# Load RVM into a shell session *as a function*
+#
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# GPG
+export GPG_TTY=$(tty)
 
 #   Prompt colors
 #   ------------------------------------------------------------
@@ -122,16 +149,3 @@ _prompt_command() {
     PS1="╭─`_git_prompt`${WHITE}\t ${LIGHT_CYAN}\u${GRAY}@${LIGHT_BLUE}\h ${YELLOW}\w${LIGHT_MAGENTA}\$(parse_git_branch)${GRAY}\n╰─$ "
 }
 PROMPT_COMMAND=_prompt_command
-
-#
-# Mac OS Catalina
-#
-export BASH_SILENCE_DEPRECATION_WARNING=1
-
-#
-# iTerm shell integration
-#
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
-

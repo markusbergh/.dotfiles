@@ -208,6 +208,9 @@ set updatetime=100
   set backspace=eol,start,indent
   set whichwrap+=<,>,h,l
 
+  " Delete word by holding option key
+  imap <Esc><BS> <C-w>
+
   " Move line up/down
   nnoremap <S-Up> :m-2<CR>
   nnoremap <S-Down> :m+<CR>
@@ -276,6 +279,8 @@ set updatetime=100
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
   " Git symbols
+  let g:NERDTreeGitStatusUseNerdFonts = 1 
+  
   let g:NERDTreeGitStatusIndicatorMapCustom = {
       \ "Modified"  : "~",
       \ "Staged"    : "+",
@@ -283,7 +288,7 @@ set updatetime=100
       \ "Renamed"   : "➜",
       \ "Unmerged"  : "═",
       \ "Deleted"   : "✖",
-      \ "Dirty"     : "⦿",
+      \ "Dirty"     : "~",
       \ "Clean"     : "✔︎",
       \ "Unknown"   : "?"
       \ }
@@ -292,6 +297,7 @@ set updatetime=100
   let g:NERDTreeGitStatusHighlightingCustom = {}
   let g:NERDTreeGitStatusHighlightingCustom['Untracked'] = 'ctermfg=green'
   let g:NERDTreeGitStatusHighlightingCustom['Modified'] = 'ctermfg=yellow'
+  let g:NERDTreeGitStatusHighlightingCustom['Dirty'] = 'ctermfg=yellow'
 
 " }
 
