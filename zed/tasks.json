@@ -1,0 +1,70 @@
+// Project tasks configuration. See https://zed.dev/docs/tasks for documentation.
+//
+// Example:
+// See https://zed.dev/docs/tasks for more information
+[
+  {
+    "label": "Run unit test: $ZED_SYMBOL",
+    "command": "$ZED_CUSTOM_TYPESCRIPT_RUNNER",
+    "args": [
+      "exec",
+      "--",
+      "vitest",
+      "run",
+      "--no-file-parallelism",
+      "--testNamePattern",
+      "\"$ZED_CUSTOM_TYPESCRIPT_VITEST_TEST_NAME\"",
+      "$ZED_FILE"
+    ],
+    "hide": "on_success",
+    "tags": [
+      "ts-test",
+      "js-test",
+      "tsx-test"
+    ],
+    "cwd": "$ZED_CUSTOM_TYPESCRIPT_VITEST_PACKAGE_PATH",
+    "show_command": false,
+    "show_summary": false
+  },
+  {
+    "label": "Run E2E tests: $ZED_SYMBOL",
+    "command": "$ZED_CUSTOM_TYPESCRIPT_RUNNER",
+    "args": [
+      "exec",
+      "--",
+      "playwright",
+      "test",
+      "$ZED_FILE:$ZED_ROW"
+    ],
+    "hide": "on_success",
+    "tags": [
+      "ts-test",
+      "js-test",
+      "tsx-test"
+    ],
+    "cwd": "$ZED_CUSTOM_TYPESCRIPT_VITEST_PACKAGE_PATH",
+    "show_command": false,
+    "show_summary": false
+  },
+  {
+    "label": "Run E2E tests with UI: $ZED_SYMBOL",
+    "command": "$ZED_CUSTOM_TYPESCRIPT_RUNNER",
+    "args": [
+      "exec",
+      "--",
+      "playwright",
+      "test",
+      "$ZED_FILE:$ZED_ROW",
+      "--ui"
+    ],
+    "hide": "always",
+    "tags": [
+      "ts-test",
+      "js-test",
+      "tsx-test"
+    ],
+    "cwd": "$ZED_CUSTOM_TYPESCRIPT_VITEST_PACKAGE_PATH",
+    "show_command": false,
+    "show_summary": false
+  }
+]
