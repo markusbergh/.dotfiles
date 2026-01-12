@@ -1,8 +1,20 @@
 #   -------------------------------------------------------------
 #   .bash_profile
 #
-#   This file contains all of bash configuration and aliases.
+#   Bash configuration - sources common files shared with zsh
 #   -------------------------------------------------------------
+
+#
+#   Common configuration (shared with zsh)
+#   -------------------------------------------------------------
+source ~/.dotfiles/common/environment
+source ~/.dotfiles/common/aliases
+source ~/.dotfiles/common/git_prompt
+
+#
+#   Work-specific configuration (gitignored)
+#   -------------------------------------------------------------
+[[ -f ~/.dotfiles/common/work ]] && source ~/.dotfiles/common/work
 
 #
 #   Bash auto-completion
@@ -14,16 +26,7 @@
 #   -------------------------------------------------------------
 if [ -f ~/.dotfiles/bash_git_completion.bash ]; then
   source ~/.dotfiles/bash_git_completion.bash
-
-  # Add git completion to aliases
   __git_complete g __git_main
-fi
-
-#
-#   Bash Aliases
-#   ------------------------------------------------------------
-if [ -f ~/.dotfiles/bash_aliases.bash ]; then
-  source ~/.dotfiles/bash_aliases.bash
 fi
 
 #
@@ -34,117 +37,56 @@ if [ -f ~/.dotfiles/bash_npm_autocompletion.bash ]; then
 fi
 
 #
-#   asdf
-#   ------------------------------------------------------------
-if [ -f ~/.asdf/asdf.sh ]; then
-  . "$HOME/.asdf/asdf.sh"
-  . "$HOME/.asdf/completions/asdf.bash"
-fi
-
-#   Paths
-#   ------------------------------------------------------------
-export PATH="$PATH:/opt/local/bin:/usr/local/sbin"
-
-#   Set default blocksize for ls, df, du
-#   ------------------------------------------------------------
-export BLOCKSIZE=1k
-
-#
-#   Avoid succesive duplicates in the bash command history.
+#   Avoid successive duplicates in bash command history
 #   ------------------------------------------------------------
 export HISTCONTROL=ignoredups
 
 #
-#   Set Default Editor
+#   Silence macOS bash deprecation warning
 #   ------------------------------------------------------------
-export EDITOR=vim
-
-#
-#   Setup colors for listing
-#   ------------------------------------------------------------
-export CLICOLOR=1
-export LSCOLORS="HxFxcxdxCxegedabagacad"
-
-#
-#   Avoid succesive duplicates in the bash command history.
-#   ------------------------------------------------------------
-export HISTCONTROL=ignoredups
-
-#
-# Mac OS Catalina (bash warning)
-#
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 #
-# iTerm shell integration
-#
+#   iTerm shell integration
+#   ------------------------------------------------------------
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+#
+#   Homebrew
+#   ------------------------------------------------------------
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 #
-# Load RVM into a shell session *as a function*
-#
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
-# GPG
-export GPG_TTY=$(tty)
+#   Cargo (Rust)
+#   ------------------------------------------------------------
+. "$HOME/.cargo/env"
 
 #   Prompt colors
 #   ------------------------------------------------------------
-#
 GRAY="\[\e[0;00m\]"
-BLACK="\[\e[0;30m\]"
-RED="\[\e[0;31m\]"
-ORANGE="\[\e[0;33m\]"
-GREEN="\[\e[0;32m\]"
-PURPLE="\[\e[0;35m\]"
 WHITE='\[\e[0;37m\]'
 YELLOW="\[\e[0;33m\]"
-CYAN="\[\e[0;36m\]"
-BLUE="\[\e[0;34m\]"
-MAGENTA="\[\e[0;35m\]"
 LIGHT_BLUE="\[\e[0;94m\]"
 LIGHT_CYAN="\[\e[0;96m\]"
 LIGHT_MAGENTA="\[\e[0;95m\]"
 
 #   Git branch in prompt
 #   ------------------------------------------------------------
-#
 parse_git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }
 
-#
-# Git status
-#
+#   Git prompt with status indicator
+#   ------------------------------------------------------------
 _git_prompt() {
-  local git_status="`git status -unormal 2>&1`"
-
-  if ! [[ "$git_status" =~ not\ a\ git\ repo ]]; then
-    if [[ "$git_status" =~ nothing\ to\ commit ]]; then
-      local ansi=42
-    elif [[ "$git_status" =~ nothing\ added\ to\ commit\ but\ untracked\ files\ present ]]; then
-      local ansi=43
-    else
-      local ansi=43
-    fi
-
-    if [[ "$git_status" =~ On\ branch\ ([^[:space:]]+) ]]; then
-      branch=${BASH_REMATCH[1]}
-      test "$branch" != master || branch=' '
-    else
-      # Detached HEAD.  (branch=HEAD is a faster alternative.)
-      branch="(`git describe --all --contains --abbrev=4 HEAD 2> /dev/null ||
-                echo HEAD`)"
-    fi
-
+  local ansi="$(_git_status_ansi)"
+  if [ -n "$ansi" ]; then
     echo -n '\[\e[0;37;'"$ansi"';1m\] \[\e[0m\] '
   fi
 }
 
-#
-# Set prompt
-#
+#   Set prompt
+#   ------------------------------------------------------------
 _prompt_command() {
     PS1="╭─`_git_prompt`${WHITE}\t ${LIGHT_CYAN}\u${GRAY}@${LIGHT_BLUE}\h ${YELLOW}\w${LIGHT_MAGENTA}\$(parse_git_branch)${GRAY}\n╰─$ "
 }

@@ -1,0 +1,38 @@
+#
+# Git Prompt Helper
+# Returns ANSI code for git status indicator
+# ------------------------------------------------------------
+
+# Returns git status indicator color code
+# Usage: Call _git_status_ansi to get the color code (42=green, 43=yellow)
+# Returns nothing if not in a git repo
+_git_status_ansi() {
+  local git_status="`git status -unormal 2>&1`"
+
+  if ! [[ "$git_status" =~ not\ a\ git\ repo ]]; then
+    if [[ "$git_status" =~ nothing\ to\ commit ]]; then
+      echo "42"  # Green - clean
+    else
+      echo "43"  # Yellow - dirty or untracked
+    fi
+  fi
+}
+
+# Get current git branch or detached HEAD info
+_git_branch_name() {
+  local git_status="`git status -unormal 2>&1`"
+
+  if ! [[ "$git_status" =~ not\ a\ git\ repo ]]; then
+    if [[ "$git_status" =~ On\ branch\ ([^[:space:]]+) ]]; then
+      local branch="${BASH_REMATCH[1]}"
+      if [ "$branch" = "master" ] || [ "$branch" = "main" ]; then
+        echo " "
+      else
+        echo "$branch"
+      fi
+    else
+      # Detached HEAD
+      echo "$(git describe --all --contains --abbrev=4 HEAD 2>/dev/null || echo HEAD)"
+    fi
+  fi
+}
