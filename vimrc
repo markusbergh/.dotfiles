@@ -1,5 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
+set regexpengine=2
 set encoding=utf-8
 set updatetime=100
 
@@ -22,6 +23,10 @@ set updatetime=100
   Plugin 'ryanoasis/vim-devicons'
   Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
   Plugin 'mtscout6/syntastic-local-eslint.vim'
+
+  " Vundle TypeScript plugins
+  Plugin 'HerringtonDarkholme/yats.vim'
+  Plugin 'leafgarland/typescript-vim'
 
   " Vundle git plugins
   Plugin 'Xuyuanp/nerdtree-git-plugin'
