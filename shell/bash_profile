@@ -4,37 +4,44 @@
 #   Bash configuration - sources common files shared with zsh
 #   -------------------------------------------------------------
 
+export DOTFILES="$HOME/.dotfiles"
+
+#
+#   Homebrew (first, so everything below can find brew-installed tools)
+#   -------------------------------------------------------------
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 #
 #   Common configuration (shared with zsh)
 #   -------------------------------------------------------------
-source ~/.dotfiles/common/environment
-source ~/.dotfiles/common/aliases
-source ~/.dotfiles/common/git_prompt
+source "$DOTFILES/shell/environment"
+source "$DOTFILES/shell/aliases"
+source "$DOTFILES/shell/git_prompt"
 
 #
-#   Work-specific configuration (gitignored)
+#   Machine-specific configuration (gitignored)
 #   -------------------------------------------------------------
-[[ -f ~/.dotfiles/common/work ]] && source ~/.dotfiles/common/work
+[[ -f "$DOTFILES/shell/work" ]] && source "$DOTFILES/shell/work"
 
 #
-#   Bash auto-completion
+#   Bash auto-completion (brew install bash-completion@2)
 #   -------------------------------------------------------------
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+[[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 
 #
-#   Git auto-completion
+#   Git auto-completion (Homebrew git if installed, otherwise Xcode's git)
 #   -------------------------------------------------------------
-if [ -f ~/.dotfiles/bash_git_completion.bash ]; then
-  source ~/.dotfiles/bash_git_completion.bash
-  __git_complete g __git_main
-fi
-
-#
-#   Npm Auto Completion
-#   ------------------------------------------------------------
-if [ -f ~/.dotfiles/bash_npm_autocompletion.bash ]; then
-  source ~/.dotfiles/bash_npm_autocompletion.bash
-fi
+for git_completion in \
+  "$HOMEBREW_PREFIX/etc/bash_completion.d/git-completion.bash" \
+  "$(xcode-select -p 2>/dev/null)/usr/share/git-core/git-completion.bash"
+do
+  if [ -f "$git_completion" ]; then
+    source "$git_completion"
+    __git_complete g __git_main
+    break
+  fi
+done
+unset git_completion
 
 #
 #   Avoid successive duplicates in bash command history
@@ -50,11 +57,6 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 #   iTerm shell integration
 #   ------------------------------------------------------------
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
-#
-#   Homebrew
-#   ------------------------------------------------------------
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 #
 #   Cargo (Rust)

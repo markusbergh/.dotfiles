@@ -7,7 +7,34 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "ssh_connections": [
+    {
+      "host": "rosamoln",
+      "args": [],
+      "projects": [
+        {
+          "paths": [
+            "/home/markus"
+          ]
+        }
+      ]
+    }
+  ],
+  "buffer_line_height": "comfortable",
+  "buffer_font_weight": 400.0,
   "git_panel": {
+    "dock": "left",
     "tree_view": true
   },
   "current_line_highlight": "gutter",
@@ -16,7 +43,7 @@
   },
   "selection_highlight": true,
   "autosave": "off",
-  "disable_ai": true,
+  "disable_ai": false,
   "tab_bar": {
     "show_tab_bar_buttons": true,
     "show": true
@@ -39,15 +66,16 @@
     "git_status": true
   },
   "title_bar": {
+    "show_branch_status_icon": true,
     "show_sign_in": false,
     "show_user_picture": false,
     "show_onboarding_banner": true,
     "show_project_items": true,
     "show_branch_name": true,
-    "show_branch_icon": true,
     "show_menus": false
   },
   "project_panel": {
+    "dock": "left",
     "button": true
   },
   "indent_guides": {
@@ -118,7 +146,7 @@
   },
   "auto_indent_on_paste": true,
   "tab_size": 2,
-  "ui_font_size": 16,
+  "ui_font_size": 17.0,
   "buffer_font_size": 14.0,
   "theme": {
     "mode": "system",

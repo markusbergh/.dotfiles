@@ -123,7 +123,25 @@ then
   fi
 fi
 
-main_command="xcodebuild $project_type $project_command -scheme $scheme_name -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.5'"
+## Simulator destination
+# Defaults to the first iPhone on the newest installed iOS runtime.
+# Override with e.g. XCODERUN_DESTINATION='platform=iOS Simulator,name=iPhone 17,OS=latest'
+
+if [ -z "$XCODERUN_DESTINATION" ]; then
+  default_simulator=$(xcrun simctl list devices available | awk '
+    /^-- iOS / { if ($0 != runtime) { runtime = $0; found = 0 } }
+    /^ +iPhone/ && !found { found = 1; name = $0; sub(/^ +/, "", name); sub(/ \([0-9A-F-]+\).*/, "", name); latest = name }
+    END { print latest }')
+
+  if [ -z "$default_simulator" ]; then
+    echo -e "${cRed}No iPhone simulator found. Install one in Xcode or set XCODERUN_DESTINATION.${cNone}"
+    exit 1
+  fi
+fi
+
+destination="${XCODERUN_DESTINATION:-platform=iOS Simulator,name=$default_simulator,OS=latest}"
+
+main_command="xcodebuild $project_type $project_command -scheme $scheme_name -sdk iphonesimulator -destination '$destination'"
 
 if [[ $run_as == "test" ]] && [[ $run_single == "true" ]]
 then
@@ -134,7 +152,7 @@ then
     $project_type $project_command
     -scheme $scheme_name
     -sdk iphonesimulator
-    -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.5'
+    -destination '$destination'
     -only-testing $single_test_name
     test
 
@@ -143,7 +161,7 @@ then
 
   bash -c "$main_command -only-testing $single_test_name test | xcpretty"
 
-elif [ $run_as="test" ]
+elif [[ $run_as == "test" ]]
 then
   echo -e "${cBlue}
   ~~~~~ Running ~~~~~
@@ -152,7 +170,7 @@ then
     $project_type $project_command
     -scheme $scheme_name
     -sdk iphonesimulator
-    -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.5'
+    -destination '$destination'
     test
 
   ${cYellow}Using: xcpretty (for output)${cNone}
@@ -168,7 +186,7 @@ else
     $project_type $project_command
     -scheme $scheme_name
     -sdk iphonesimulator
-    -destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.5'
+    -destination '$destination'
     build
 
   ${cYellow}Using: xcpretty (for output)${cNone}

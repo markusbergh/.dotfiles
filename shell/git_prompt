@@ -1,0 +1,18 @@
+#
+# Git Prompt Helper
+# Returns ANSI code for git status indicator
+# ------------------------------------------------------------
+
+# Returns git status indicator color code
+# Usage: Call _git_status_ansi to get the color code (42=green, 43=yellow)
+# Returns nothing if not in a git work tree
+_git_status_ansi() {
+  [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ] || return
+
+  # --porcelain is stable across git versions and locales
+  if [ -z "$(git status --porcelain 2>/dev/null)" ]; then
+    echo "42"  # Green - clean
+  else
+    echo "43"  # Yellow - dirty or untracked
+  fi
+}

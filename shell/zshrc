@@ -4,12 +4,19 @@
 #   Zsh configuration - sources common files shared with bash
 #   -------------------------------------------------------------
 
+export DOTFILES="$HOME/.dotfiles"
+
+#
+#   Homebrew (first, so its paths and completions exist before compinit)
+#   -------------------------------------------------------------
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 #
 #   Common configuration (shared with bash)
 #   -------------------------------------------------------------
-source ~/.dotfiles/common/environment
-source ~/.dotfiles/common/aliases
-source ~/.dotfiles/common/git_prompt
+source "$DOTFILES/shell/environment"
+source "$DOTFILES/shell/aliases"
+source "$DOTFILES/shell/git_prompt"
 
 #
 #   Completion
@@ -18,14 +25,9 @@ autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 #
-#   Work-specific configuration (gitignored)
+#   Machine-specific configuration (gitignored)
 #   -------------------------------------------------------------
-[[ -f ~/.dotfiles/common/work ]] && source ~/.dotfiles/common/work
-
-#
-#   Homebrew
-#   -------------------------------------------------------------
-eval "$(/opt/homebrew/bin/brew shellenv)"
+[[ -f "$DOTFILES/shell/work" ]] && source "$DOTFILES/shell/work"
 
 #
 #   iTerm shell integration

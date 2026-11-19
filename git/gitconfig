@@ -18,10 +18,6 @@
   newNormal = green bold
   newHighlight = green bold 22
 
-[user]
-  name = "Markus Bergh"
-  email = hi@markusbergh.se
-
 [alias]
   # one-line log
   ls = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate --date=short
@@ -52,3 +48,9 @@
   defaultBranch = main
 [commit]
   gpgsign = false
+
+# Machine-specific settings (name, email, signing) live outside the repo.
+# Keep this last so the local file overrides anything above.
+# Write to it with: git config --file ~/.gitconfig.local user.email you@example.com
+[include]
+  path = ~/.gitconfig.local
